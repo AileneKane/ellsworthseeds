@@ -7,8 +7,8 @@ library(AER)
 library(lme4)
 library(colorspace)
 
-setwd("/Users/eileenarata/Desktop/Q Sci 483/Final Project/Data")
-seeds <- read.csv("completed_plots.csv")
+setwd("~/GitHub/ellsworthseeds/analyses")
+seeds <- read.csv("../data/completed_plots.csv")
 
 #Explore Data
 seeds$treat <- as.factor(seeds$treat)
