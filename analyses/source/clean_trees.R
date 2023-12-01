@@ -1,0 +1,48 @@
+#Clean species names when applicable
+d2020$SPP[d2020$SPP=="TSHE "]<-"TSHE"
+d2020$SPP[d2020$SPP=="TSHE "]<-"TSHE"
+d2020$SPP[d2020$SPP=="NONE "]<-"NONE"
+d2007$SPP[d2007$SPP=="NONE "]<-"NONE"
+d2020$SPP[d2020$SPP=="TREEC"]<-"NONE"
+
+d2020$SPP[d2020$SPP=="THSE"]<-"TSHE"#Guessing that this is the correct species? 
+
+#Is it really ABAM- not ABR?
+
+#Clean plot names
+d2020$SITE_ID[d2020$SITE_ID=="N2-1+A58:C66VB"]<-"N2-1VB"
+
+#Clean Tag NAmes (i.e., whehn tags changed)
+d2007$TAG.2007<-d2007$TAG
+d2020$TAG.2007<-d2020$TAG
+d2020$TAG.2007[grep("WAS TAG",d2020$REMARKS)]<-substr(d2020$REMARKS[grep("WAS TAG",d2020$REMARKS)],9,nchar(d2020$REMARKS[grep("WAS TAG",d2020$REMARKS)]))
+#Alittle more cleaning up to do
+d2020$TAG.2007[d2020$TAG.2007=="691, GROWING OUT OF THPL STUMP"]<-"691"
+d2020$TAG.2007[d2020$REMARKS=="TGT W/2961 (SNAG). WAS TAG 560. IN OLD DATA SET, DATA FOR TREES 560 AND 561 WERE SWITCHED. "]<-"560"
+d2020$TAG.2007[d2020$REMARKS=="WAS TAG 1268, TGT W/ DEAD SAPLING"]<-"1268"
+d2020$TAG.2007[d2020$TAG.2007=="1230, TGT W/ 1231"]<-"1230"
+d2020$TAG.2007[d2020$TAG.2007=="1191. MUSHROOMS"]<-"1191"
+d2020$TAG.2007[d2020$TAG.2007=="574, BARK PEELED AT BASE"]<-"574"
+d2020$TAG.2007[d2020$TAG.2007=="250. HEIGHT MAY BE INACCURATE; PREVIOUSLY 35.2."]<-"250"
+d2020$TAG.2007[d2020$TAG.2007=="913. SCAR 1/2 WAY UP"]<-"913"
+d2020$TAG.2007[d2020$TAG.2007=="# 278"]<-"278"
+
+
+#clean some DBHs that are 0
+d2020$DBH..CM.[d2020$SITE_ID=="N2-12V" & d2020$TAG=="1048"]<-70.1/2#comments say MEASURED TOGETHER WITH 1049
+d2020$DBH..CM[d2020$SITE_ID=="N2-12V" & d2020$TAG=="1049"]<-70.1/2#comments say MEASURED TOGETHER WITH 1048
+d2020$DBH..CM[d2020$SITE_ID=="N2-12V" & d2020$TAG=="1059"]<-74.2/2#comments say MEASURED TOGETHER WITH 1060
+d2020$DBH..CM[d2020$SITE_ID=="N2-12V" & d2020$TAG=="1060"]<-74.2/2#comments say MEASURED TOGETHER WITH 1059
+d2020$DBH..CM[d2020$SITE_ID=="N2-18VB" & d2020$TAG=="414"]<-27#no comments picked a nnumber based on other trees measured in 2020 of same size in 2007
+d2020$DBH..CM[d2020$SITE_ID=="N2-18VB" & d2020$TAG=="422"]<-39.4/2#comments say MEASURED TOGETHER WITH 423
+d2020$DBH..CM[d2020$SITE_ID=="N2-18VB" & d2020$TAG=="423"]<-39.4/2#measured with 422
+
+d2020$TAG.2007<-as.integer(d2020$TAG.2007)
+
+#clean LIVING.OR.DC.2020 column
+d2020$LIVING.OR.DC[d2020$LIVING.OR.DC=="L "]<-"L"
+
+#create a new column for merging that removes B and replaces with V in all cases
+d2020$plot2<-gsub("VB","V",d2020$SITE_ID)
+d2007$plot2<-gsub("VB","V",d2007$SITE_ID)
+
