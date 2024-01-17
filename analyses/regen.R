@@ -87,5 +87,12 @@ source("analyses/source/get_agecat.R")
 
 #Fit models and make plots of effects of treatment across stand age, for different life stages
 
+
+##Look at total basal area by species by plot:
+#head(dalltrt)
+baspp<-aggregate(dalltrt$BA.2020, by=list(dalltrt$SITE_ID.x, dalltrt$SPP), sum, na.rm=TRUE)
+
 #Jan 17, 2024 To do:
-#1) Make plots of 
+#1) Look at # of seedlings and saplings per adult tree in the plot, across treatments
+#2) Make plots/do analyses of seedlings and saplings standarized by basal area within the plot; 
+#3) 
