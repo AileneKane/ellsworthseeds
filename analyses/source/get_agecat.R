@@ -28,20 +28,20 @@ dalltrt$OLD.CAT[dalltrt$AGE>40]<-1
 dalltrt$OLD.CAT<-as.factor(dalltrt$OLD.CAT)
 dalltrt$alltreat<-paste(dalltrt$OLD.CAT,dalltrt$TREAT,sep="_")
 
-mortdat$OLD.CAT<-0#young forests =0
-mortdat$OLD.CAT[mortdat$AGE>40]<-1
-mortdat$OLD.CAT<-as.factor(mortdat$OLD.CAT)
-mortdat$alltreat<-paste(mortdat$OLD.CAT,mortdat$TREAT,sep="_")
-
-#mistletoe data
-misttrt$OLD.CAT<-0#young forests =0
-misttrt$OLD.CAT[misttrt$AGE>40]<-1
-misttrt$OLD.CAT<-as.factor(misttrt$OLD.CAT)
-misttrt$alltreat<-paste(misttrt$OLD.CAT,misttrt$TREAT,sep="_")
-mistalltrtwide$OLD.CAT<-0
-mistalltrtwide$OLD.CAT[mistalltrtwide$AGE>40]<-1
-mistalltrtwide$OLD.CAT<-as.factor(mistalltrtwide$OLD.CAT)
-mistalltrtwide$alltreat<-paste(mistalltrtwide$OLD.CAT,mistalltrtwide$TREAT,sep="_")
+# mortdat$OLD.CAT<-0#young forests =0
+# mortdat$OLD.CAT[mortdat$AGE>40]<-1
+# mortdat$OLD.CAT<-as.factor(mortdat$OLD.CAT)
+# mortdat$alltreat<-paste(mortdat$OLD.CAT,mortdat$TREAT,sep="_")
+# 
+# #mistletoe data
+# misttrt$OLD.CAT<-0#young forests =0
+# misttrt$OLD.CAT[misttrt$AGE>40]<-1
+# misttrt$OLD.CAT<-as.factor(misttrt$OLD.CAT)
+# misttrt$alltreat<-paste(misttrt$OLD.CAT,misttrt$TREAT,sep="_")
+# mistalltrtwide$OLD.CAT<-0
+# mistalltrtwide$OLD.CAT[mistalltrtwide$AGE>40]<-1
+# mistalltrtwide$OLD.CAT<-as.factor(mistalltrtwide$OLD.CAT)
+# mistalltrtwide$alltreat<-paste(mistalltrtwide$OLD.CAT,mistalltrtwide$TREAT,sep="_")
 
 #lwd data
 lwdalltrt$OLD.CAT<-0#young forests =0

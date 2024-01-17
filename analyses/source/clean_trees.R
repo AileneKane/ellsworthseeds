@@ -2,7 +2,7 @@
 d2020$SPP[d2020$SPP=="TSHE "]<-"TSHE"
 d2020$SPP[d2020$SPP=="TSHE "]<-"TSHE"
 d2020$SPP[d2020$SPP=="NONE "]<-"NONE"
-d2007$SPP[d2007$SPP=="NONE "]<-"NONE"
+#d2007$SPP[d2007$SPP=="NONE "]<-"NONE"
 d2020$SPP[d2020$SPP=="TREEC"]<-"NONE"
 
 d2020$SPP[d2020$SPP=="THSE"]<-"TSHE"#Guessing that this is the correct species? 
@@ -13,7 +13,7 @@ d2020$SPP[d2020$SPP=="THSE"]<-"TSHE"#Guessing that this is the correct species?
 d2020$SITE_ID[d2020$SITE_ID=="N2-1+A58:C66VB"]<-"N2-1VB"
 
 #Clean Tag NAmes (i.e., whehn tags changed)
-d2007$TAG.2007<-d2007$TAG
+#d2007$TAG.2007<-d2007$TAG
 d2020$TAG.2007<-d2020$TAG
 d2020$TAG.2007[grep("WAS TAG",d2020$REMARKS)]<-substr(d2020$REMARKS[grep("WAS TAG",d2020$REMARKS)],9,nchar(d2020$REMARKS[grep("WAS TAG",d2020$REMARKS)]))
 #Alittle more cleaning up to do
@@ -44,5 +44,5 @@ d2020$LIVING.OR.DC[d2020$LIVING.OR.DC=="L "]<-"L"
 
 #create a new column for merging that removes B and replaces with V in all cases
 d2020$plot2<-gsub("VB","V",d2020$SITE_ID)
-d2007$plot2<-gsub("VB","V",d2007$SITE_ID)
+#d2007$plot2<-gsub("VB","V",d2007$SITE_ID)
 
