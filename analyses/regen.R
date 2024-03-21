@@ -90,9 +90,38 @@ source("analyses/source/get_agecat.R")
 
 ##Look at total basal area by species by plot:
 #head(dalltrt)
-baspp<-aggregate(dalltrt$BA.2020, by=list(dalltrt$SITE_ID.x, dalltrt$SPP), sum, na.rm=TRUE)
+baspp<-aggregate(dalltrt$BA.2020, by=list(dalltrt$SITE_ID.x,dalltrt$SPP), sum, na.rm=TRUE)
+colnames(baspp)<-c("SITE_ID","SPP","BA")
+numsdlngs<-aggregate(sd2020$COUNT, by=list(sd2020$SITE_ID, sd2020$SPP), sum, na.rm=TRUE)
+colnames(numsdlngs)<-c("SITE_ID","SPP","SDLGCOUNT")
+numsap<-aggregate(sp2020$COUNT, by=list(sp2020$SITE_ID, sp2020$SPP), sum, na.rm=TRUE)
+colnames(numsap)<-c("SITE_ID","SPP","SAPCOUNT")
+allregen<-full_join(numsdlngs,numsap)
+allregen$SDLGCOUNT[is.na(allregen$SDLGCOUNT)]<-0
+allregen$SAPCOUNT[is.na(allregen$SAPCOUNT)]<-0
+allregenba<-left_join(allregen,baspp)
+allregenba$BA[is.na(allregenba$BA)]<-0
+colnames(treatdat)[1]<-"SITE_ID"
+allregenbat<-left_join(allregenba,treatdat)
+allregenbat$SDLG.BA<-allregenbat$SDLGCOUNT/allregenbat$BA
+allregenbat$SAP.BA<-allregenbat$P/allregenbat$BA
+png("figs/seedsapperBA.png",height=600,width=900)
+par(mfrow=c(1,2))
+boxplot(allregenbat$SDLG.BA~allregenbat$treatment, 
+        col=c("lightblue","darkgreen"), main="Seedlings",
+        ylab="Number per adult BA", xlab="Treatment",names=c("control","thinned"))
+boxplot(allregenbat$SAP.BA~allregenbat$treatment, 
+        col=c("lightblue","darkgreen"), main="Saplings",
+        ylab="Number per adult BA", xlab="Treatment",names=c("control","thinned"))
+dev.off()
 
-#Jan 17, 2024 To do:
+boxplot(allregenbat$SDLG.BA~allregenbat$SPP, main="Seedlings",
+        ylab="Number per adult BA", xlab="Species")
+
+boxplot(allregenbat$SAP.BA~allregenbat$SPP, main="Saplings",
+        ylab="Number per adult BA", xlab="Species")
+
+#March 20, 2024 To do:
 #1) Look at # of seedlings and saplings per adult tree in the plot, across treatments
 #2) Make plots/do analyses of seedlings and saplings standarized by basal area within the plot; 
 #3) 
