@@ -99,13 +99,18 @@ colnames(numsap)<-c("SITE_ID","SPP","SAPCOUNT")
 allregen<-full_join(numsdlngs,numsap)
 allregen$SDLGCOUNT[is.na(allregen$SDLGCOUNT)]<-0
 allregen$SAPCOUNT[is.na(allregen$SAPCOUNT)]<-0
-allregenba<-left_join(allregen,baspp)
-allregenba$BA[is.na(allregenba$BA)]<-0
+#the below leaves out many plots with no seedlings/saplings, which is not good
+#allregenba<-left_join(allregen,baspp)
+#allregenba$BA[is.na(allregenba$BA)]<-0
+allbaregen<-left_join(baspp,allregen)
+allbaregen$SDLGCOUNT[is.na(allbaregen$SDLGCOUNT)]<-0
+allbaregen$SAPCOUNT[is.na(allbaregen$SAPCOUNT)]<-0
+
 colnames(treatdat)[1]<-"SITE_ID"
-allregenbat<-left_join(allregenba,treatdat)
+allregenbat<-left_join(allbaregen,treatdat)
 allregenbat$SDLG.BA<-allregenbat$SDLGCOUNT/allregenbat$BA
-allregenbat$SAP.BA<-allregenbat$P/allregenbat$BA
-png("figs/seedsapperBA.png",height=600,width=900)
+allregenbat$SAP.BA<-allregenbat$SAPCOUNT/allregenbat$BA
+png("figs/seedsapperBA_with0s.png",height=600,width=900)
 par(mfrow=c(1,2))
 boxplot(allregenbat$SDLG.BA~allregenbat$treatment, 
         col=c("lightblue","darkgreen"), main="Seedlings",
@@ -114,14 +119,16 @@ boxplot(allregenbat$SAP.BA~allregenbat$treatment,
         col=c("lightblue","darkgreen"), main="Saplings",
         ylab="Number per adult BA", xlab="Treatment",names=c("control","thinned"))
 dev.off()
-
+png("figs/seedsapperBA_with0s_byspp.png",height=1200,width=600)
+par(mfrow=c(2,1))
 boxplot(allregenbat$SDLG.BA~allregenbat$SPP, main="Seedlings",
         ylab="Number per adult BA", xlab="Species")
 
 boxplot(allregenbat$SAP.BA~allregenbat$SPP, main="Saplings",
         ylab="Number per adult BA", xlab="Species")
+dev.off()
 
-#March 20, 2024 To do:
-#1) Look at # of seedlings and saplings per adult tree in the plot, across treatments
-#2) Make plots/do analyses of seedlings and saplings standarized by basal area within the plot; 
-#3) 
+#Calculate transition probabilities from seedling to sapling using two census dates
+
+
+#Calculate 
